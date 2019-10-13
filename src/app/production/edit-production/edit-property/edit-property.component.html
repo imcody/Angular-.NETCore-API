@@ -1,0 +1,28 @@
+<div *ngIf="isDisplayed"
+    class="v-section row"
+    [class.has-danger]="vInput.invalid && vInput.touched">
+    <div class="col-sm-6">
+        <label *ngIf="label">
+            <h6>{{label}}
+                <span *ngIf="required === 'true'"> *</span>
+            </h6>
+        </label>
+    </div>
+    <div class="col-sm-6">
+        <p-dropdown #vInput="ngModel"
+            [name]="name"
+            [placeholder]="placeholder"
+            [autoWidth]="false"
+            [required]="required"
+            [options]="options"
+            [(ngModel)]="value"
+            [class.form-control-danger]="vInput.invalid && vInput.touched"
+            [showClear]="showClear"
+            class="v-dropdown">
+        </p-dropdown>
+    </div>
+    <div *ngIf="required === 'true' && vInput.invalid && vInput.touched"
+        class="form-control-feedback">
+        {{errorMessage}}
+    </div>
+</div>

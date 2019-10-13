@@ -1,0 +1,122 @@
+﻿<div bsModal
+    #addEditFarmModal="bs-modal"
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="addEditFarmModal"
+    aria-hidden="true"
+    [config]="{backdrop: 'static'}">
+    <form *ngIf="active"
+        #addEditFarmForm="ngForm"
+        id="frm_create_user"
+        novalidate
+        (ngSubmit)="save()">
+        <v-modal modalContent>
+            <div v-modal-header>
+                <h2>
+                    <span>{{l("Create new farm")}}</span>
+                </h2>
+                <button type="button"
+                    class="close"
+                    (click)="close()"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div v-modal-body>
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label for="name"
+                                    class="form-label">{{l("Name")}}</label>
+                                <input id="name"
+                                    #name="ngModel"
+                                    type="text"
+                                    name="Name"
+                                    [(ngModel)]="farm.name"
+                                    required
+                                    minlength="3"
+                                    maxlength="32"
+                                    class="validate form-control"
+                                    placeholder="{{l('Name')}}"
+                                    [class.form-control-danger]="name.invalid && name.touched">
+                            </div>
+                            <div *ngIf="name.invalid && name.touched"
+                                class="form-control-feedback">
+                                Name is required, and must have at least 3 characters
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label for="organizationNumber"
+                                    class="form-label">{{l("Organization number")}}</label>
+                                <input id="organizationNumber"
+                                    #organizationNumber="ngModel"
+                                    type="number"
+                                    name="organizationNumber"
+                                    [(ngModel)]="farm.organizationNumber"
+                                    required
+                                    min="0"
+                                    class="validate form-control"
+                                    placeholder="{{l('Organization number')}}"
+                                    [class.form-control-danger]="organizationNumber.invalid && organizationNumber.touched">
+                            </div>
+                            <div *ngIf="organizationNumber.invalid && organizationNumber.touched"
+                                class="form-control-feedback">
+                                Organization number is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label for="longitude"
+                                    class="form-label">{{l("Longitude")}}</label>
+                                <input id="longitude"
+                                    #longitude="ngModel"
+                                    type="number"
+                                    name="longitude"
+                                    [(ngModel)]="farm.longitude"
+                                    required
+                                    class="validate form-control"
+                                    placeholder="{{l('Longitude')}}"
+                                    [class.form-control-danger]="longitude.invalid && longitude.touched">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label for="latitude"
+                                    class="form-label">{{l("Latitude")}}</label>
+                                <input id="latitude"
+                                    #latitude="ngModel"
+                                    type="number"
+                                    name="latitude"
+                                    [(ngModel)]="farm.latitude"
+                                    required
+                                    class="validate form-control"
+                                    placeholder="{{l('Latitude')}}"
+                                    [class.form-control-danger]="latitude.invalid && latitude.touched">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-modal-footer>
+                <div class="text-right">
+                    <button [disabled]="saving"
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="close()">{{l("Cancel")}}</button>
+                    <button [disabled]="!addEditFarmForm.valid || saving"
+                        class="btn btn-primary"
+                        type="submit">{{l("Save")}}</button>
+                </div>
+            </div>
+        </v-modal>
+    </form>
+</div>

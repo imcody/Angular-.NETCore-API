@@ -1,0 +1,266 @@
+.ui-table .ui-table {
+    .ui-table-thead>tr>th,
+    .ui-table-tfoot>tr>td {
+        background: transparent;
+        padding: 18px 10px;
+        font-family: Montserrat, sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .ui-sortable-column:not(.ui-state-highlight):hover {
+        background-color: #f5f5f5;
+        border-color: #d9d9d9;
+    }
+    .ui-table-tbody>tr {
+        font-family: Montserrat, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.87);
+    }
+    .ui-table-tbody>tr>td,
+    .ui-table-tfoot>tr>td {
+        padding: 10px 10px;
+    }
+    .ui-table-tbody>tr {
+        font-family: Montserrat, sans-serif;
+        font-size: 14px;
+        font-weight: 300;
+        color: #67757c;
+    }
+    .ui-table-tbody>tr>td {
+        border: 1px solid #D5D5D5;
+        background-color: inherit;
+        border: 0px;
+        border-bottom: 1px solid #f3f1f1;
+    }
+    .ui-table-thead>tr>th,
+    .ui-table-tfoot>tr>td {
+        background: transparent;
+        padding: 18px 10px;
+        font-family: Montserrat, sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+    }
+    .ui-table-thead>tr>th,
+    .ui-table-tfoot>tr>td {
+        background-color: transparent;
+        border: 0px solid #d9d9d9;
+        color: #745af2;
+    }
+}
+
+.v-calendar {
+    .ui-calendar {
+        width: 100%;
+        .ui-calendar-button {
+            position: absolute;
+            height: 100%;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            width: 2em;
+            border-left: 0 none;
+        }
+        input {
+            font-family: inherit;
+            font-size: 14px;
+            height: 38px;
+            padding: 0.375rem 0.75rem;
+            min-width: 100%;
+        }
+    }
+    .ui-datepicker {
+        min-width: unset;
+        box-shadow: 0 0 0 0;
+    }
+    .ui-widget-header {
+        .ui-widget-header {
+            background: #f6f7f9 0 0 repeat-x;
+            background: linear-gradient(to bottom, #f6f7f9 0%, #ebedf0 100%);
+        }
+    }
+    .ui-widget.ui-button,
+    .ui-button {
+        border: 1px solid #745AF2;
+        color: #FFFFFF;
+        background: #745AF2;
+        transition: background-color .2s;
+        right: 0px;
+    }
+}
+
+.v-section {
+    margin-bottom: 20px;
+}
+
+.card-body .v-section label h4 {
+    font-weight: 500;
+}
+
+.v-dropdown {
+    .ui-dropdown {
+        width: 100%;
+        height: 38px;
+        padding-top: 2px;
+    }
+}
+
+.v-checkbox-list {
+    .ui-radiobutton {
+        .ui-radiobutton-box {
+            background: #dee2e6;
+            border: 0px;
+            margin-top: -9px;
+            &.ui-state-active {
+                border: 0px;
+                background: #745af2;
+                color: #FFFFFF;
+                .ui-radiobutton-icon {
+                    font-size: 11px;
+                }
+            }
+        }
+    }
+}
+
+.v-checkbox-list {
+    p-checkbox {
+        display: block;
+    }
+    .ui-chkbox .ui-chkbox-box {
+        margin-top: -7px;
+        border-radius: 5px;
+        background: #dee2e6;
+        border: 0px;
+        &.ui-state-active {
+            background: #745af2;
+            .ui-chkbox-icon {
+                font-size: 12px;
+                padding-top: 3px;
+            }
+        }
+    }
+}
+
+.v-toggle {
+    .ui-togglebutton.ui-button {
+        border-radius: 15px;
+        border: 0px;
+        font-size: 14px;
+        &.ui-state-active {
+            border: 1px #64bd63 solid;
+            background: #64bd63;
+            color: #FFFFFF;
+        }
+        &.ui-state-default {
+            border: 1px #ced4da solid;
+        }
+    }
+}
+
+// .upload-spinner {
+//     background: #ffffffb5;
+//     color: white;
+//     width: 100%;
+//     height: 100%;
+//     position: absolute;
+//     top: 0px;
+//     left: 0px;
+//     z-index: 1;
+//     &--circle {
+//         transformY: 50%;
+//         position: absolute;
+//         top: 50%;
+//         right: 50%;
+//         -webkit-transform: translate(50%, -50%);
+//         transform: translate(50%, -50%);
+//     }
+// }
+.v-uploadable-logo {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    &__img {
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+    .avatar-edit {
+        position: absolute;
+        bottom: -4px;
+        right: 24px;
+    }
+    img {
+        min-width: 250px;
+        height: 250px;
+    }
+    .ui-fileupload-buttonbar.ui-widget-header {
+        bordeR: 0px;
+        background: none;
+    }
+    .ui-fileupload-content {
+        display: none;
+    }
+    .ui-button-icon-left.ui-clickable.pi.pi-plus {
+        margin-left: -4px;
+        &:hover {
+            transform: scale(1);
+            animation: grow 0.9s ease-in-out infinite;
+        }
+    }
+    .avatar-reset {
+        position: absolute;
+        bottom: 4px;
+        right: 6px;
+        background: #745af2;
+        height: 25px;
+        width: 25px;
+        border-radius: 5px;
+        cursor: pointer;
+        i {
+            margin-left: 8px;
+            color: #fff;
+            font-size: 13px;
+        }
+        &:hover i {
+            animation: grow 0.9s ease-in-out infinite;
+        }
+    }
+    .ui-fileupload-buttonbar .ui-button {
+        vertical-align: middle;
+        margin-right: .25em;
+        width: 25px;
+        height: 25px;
+        border-radius: 5px;
+        background: white;
+        border: 1px white solid;
+        color: #745af2;
+        box-shadow: 1px 1px 6px;
+    }
+    .avatar-reset,
+    .avatar-edit {
+        opacity: 0;
+        transition: 0.2s ease-in opacity;
+    }
+    &:hover .avatar-reset,
+    &:hover .avatar-edit {
+        opacity: 1;
+    } // .upload-container {
+    //     position: absolute;
+    //     bottom: -24px;
+    //     right: 0px;
+    // }
+}
+
+@keyframes grow {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.4);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

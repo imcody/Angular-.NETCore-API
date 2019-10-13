@@ -1,0 +1,36 @@
+<div class="{{cssClass}}">
+  <label *ngIf="label">
+    <h6>{{label}}</h6>
+  </label>
+
+  <div class="upload-container" *ngIf="(showLink === 'false') || (uploadedFile === '')">
+    <p-fileUpload name="files" chooseLabel="Browse" auto="true" showUploadButton="false" [attr.required]="isRequired === 'true'"
+      [url]="uploadApiUrl" (onUpload)="onUploadFile($event)" (onBeforeUpload)="showSpinner()" (onRemove)="hideSpinner()" [accept]="fileType">
+    </p-fileUpload>
+
+    <div class="upload-spinner" *ngIf="spinnerVisibility">
+      <div class="upload-spinner--circle m-loader m-loader--brand m-loader--lg" style="width: 30px; display: inline-block;"></div>
+    </div>
+  </div>
+  <div *ngIf="(showLink === 'true') && (uploadedFile !== '')">
+    <div class="m-widget4">
+      <div class="m-widget4__item">
+        <div class="m-widget4__img m-widget4__img--icon">
+          <img *ngIf="fileType.indexOf('application/pdf') !== -1" src="/assets/app/media/img/files/pdf.svg" alt="">
+          <img *ngIf="fileType.indexOf('video') !== -1" src="/assets/app/media/img/files/mp4.svg" alt="">
+          <img *ngIf="fileType.indexOf('audio') !== -1" src="/assets/app/media/img/files/mp3.svg" alt="">
+        </div>
+        <div class="m-widget4__info">
+          <a [attr.href]='uploadedFile'>
+            {{uploadedFile.split("/").reverse()[0]}}
+          </a>
+        </div>
+        <div class="m-widget4__ext">
+          <a [attr.href]='uploadedFile'>
+            <i class="la la-download"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

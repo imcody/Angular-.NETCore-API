@@ -1,0 +1,21 @@
+<div class="v-uploadable-logo">
+  <div class="v-uploadable-logo__img">
+    <img [src]="getSrc()"
+      [width]="width"
+      [class]="imgClass"
+      alt="" />
+  </div>
+  <div *ngIf="uploadEnabled === 'true'"
+    class="avatar-edit">
+    <v-uploader fileType="image/*"
+      isRequired="true"
+      showLink=false
+      cssClass="avatar-edit__uploader"
+      (fileUploaded)="imageUploaded($event)"></v-uploader>
+  </div>
+  <div *ngIf="uploadEnabled === 'true'"
+    class="avatar-reset"
+    (click)="reset()">
+    <i class="fa fa-remove"></i>
+  </div>
+</div>

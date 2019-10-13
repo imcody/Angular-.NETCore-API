@@ -1,0 +1,13 @@
+<ng-container *ngIf="disabled === 'false'">
+  <p-radioButton [name]="name"
+    [value]="_inputValue"
+    label="{{label}}"
+    [(ngModel)]="value"></p-radioButton>
+</ng-container>
+<ng-container *ngIf="disabled === 'true'">
+  <p-radioButton [name]="name"
+    [value]="_inputValue"
+    label="{{label}}"
+    disabled
+    [(ngModel)]="value"></p-radioButton>
+</ng-container>

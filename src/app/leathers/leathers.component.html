@@ -1,0 +1,103 @@
+﻿<div class="row"
+    [@routerTransition]>
+    <div class="col-12">
+        <v-card title="{{l('Animals')}}">
+            <div v-card-body>
+                <div>
+                    <form class="pull-left w-25 m-b-30">
+                        <input type='text'
+                            class="form-control"
+                            placeholder='Type to filter the name column...'
+                            (input)="dt.filterGlobal($event.target.value, 'contains')" />
+                    </form>
+                    <div class="pull-right">
+                        <a class="refresh-tool"
+                            (click)="refresh()">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+                        <button type="button"
+                            [hidden]="!canAdd"
+                            data-toggle="modal"
+                            class="btn btn-primary pull-right"
+                            (click)="createLeather()">
+                            <i class="fa fa-plus"></i> Add animal
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div *ngIf="isTableLoading">
+                    <div class="lds-ellipsis">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <p-table #dt
+                    [hidden]="isTableLoading"
+                    [autoLayout]="true"
+                    [globalFilterFields]="['id', 'name', 'ppNo', 'idNo', 'farm', 'organizationNumber', 'gender', 'age', 'status']"
+                    [value]="leathers"
+                    tableStyleClass="ui-table">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>{{l('RSID')}}</th>
+                            <th *ngIf="canSeeFarm">{{l('Farm')}}</th>
+                            <th pSortableColumn="ppNo">{{l('PP Number')}}
+                                <p-sortIcon field="ppNo"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="idNo">{{l('ID Number')}}
+                                <p-sortIcon field="idNo"></p-sortIcon>
+                            </th>
+                            <th>{{l('Gender')}}</th>
+                            <th>{{l('Age')}}</th>
+                            <th>{{l('Est. slaughter date')}}</th>
+                            <th *ngIf="canSeeFarm">{{l('Status')}}</th>
+                            <th>{{l('Actions')}}</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body"
+                        let-leather>
+                        <tr>
+                            <td>{{leather.id}}</td>
+                            <td *ngIf="canSeeFarm">{{leather.farm}}</td>
+                            <td>{{leather.ppNo}}</td>
+                            <td>{{leather.idNo}}</td>
+                            <td>{{leather.gender}}</td>
+                            <td>{{leather.age}}</td>
+                            <td>{{leather.estimatedSlaughterDate.format('DD-MM-YYYY')}}</td>
+                            <td *ngIf="canSeeFarm">{{leather.status}}</td>
+                            <td>
+                                <ul class="grid-list">
+                                    <li [hidden]="!canSeeDetails">
+                                        <a (click)="showDetails(leather)">
+                                            <i class="font--blue fa fa-info-circle"></i></a>
+                                    </li>
+                                    <li [hidden]="!canEdit">
+                                        <a (click)="editLeather(leather)">
+                                            <i class="font--blue fa fa-edit"></i></a>
+                                    </li>
+                                    <li [hidden]="!canDelete">
+                                        <a (click)="delete(leather)">
+                                            <i class="font--red fa fa-remove"></i></a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p class="text-center"
+                    *ngIf="!isTableLoading && leathers.length == 0">No records</p>
+                <div class="text-align: center;"
+                    *ngIf="totalItems > pageSize">
+                    <pagination-controls (pageChange)="getDataPage($event)"
+                        id="server"></pagination-controls>
+                </div>
+            </div>
+        </v-card>
+    </div>
+</div>
+
+<app-leather-details #leatherDetailsModal></app-leather-details>
+<app-add-edit-leather-modal #addEditLeatherModal
+    (modalSave)="refresh()"></app-add-edit-leather-modal>

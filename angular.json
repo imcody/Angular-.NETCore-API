@@ -1,0 +1,188 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "ResponsibleSystem": {
+            "root": "",
+            "sourceRoot": "src",
+            "projectType": "application",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist",
+                        "index": "src/index.html",
+                        "main": "src/main.ts",
+                        "tsConfig": "src/tsconfig.json",
+                        "polyfills": "src/polyfills.ts",
+                        "assets": [
+                            "src/assets",
+                            "src/favicon.ico"
+                        ],
+                        "styles": [
+                            "src/styles.css",
+                            "node_modules/ngx-toastr/toastr.css",
+                            "node_modules/angular-calendar/css/angular-calendar.css",
+                            "node_modules/chartist/dist/chartist.css",
+                            "node_modules/quill/dist/quill.snow.css",
+                            "node_modules/dragula/dist/dragula.css",
+                            "src/assets/scss/style.scss",
+                            "node_modules/primeng/resources/themes/omega/theme.css",
+                            "node_modules/primeng/resources/primeng.min.css",
+                            "node_modules/primeicons/primeicons.css"
+                        ],
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.min.js",
+                            "node_modules/toastr/toastr.js",
+                            "node_modules/sweetalert/dist/sweetalert.min.js",
+                            "node_modules/moment/min/moment.min.js",
+                            "node_modules/spin.js/spin.min.js",
+                            "src/abp/abp-web-resources/Abp/Framework/scripts/abp.js",
+                            "src/abp/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
+                            "src/abp/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js",
+                            "src/abp/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js",
+                            "src/abp/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
+                            "src/abp/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
+                            "src/abp/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js"
+                        ]
+                    },
+                    "configurations": {
+                        "local": {
+                            "deployUrl": "http://localhost:9200/"
+                        },
+                        "stg": {
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.stg.ts"
+                                }
+                            ]
+                        },
+                        "lv": {
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.lv.ts"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "ResponsibleSystem:build:local",
+                        "port": 9200,
+                        "servePath": "/"
+                    },
+                    "configurations": {
+                        "stg": {
+                            "browserTarget": "ResponsibleSystem:build:stg"
+                        },
+                        "lv": {
+                            "browserTarget": "ResponsibleSystem:build:lv"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "ResponsibleSystem:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "src/test.ts",
+                        "karmaConfig": "./karma.conf.js",
+                        "polyfills": "src/polyfills.ts",
+                        "tsConfig": "src/tsconfig.spec.json",
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.min.js",
+                            "node_modules/pace-js/pace.min.js"
+                        ],
+                        "styles": [
+                            "src/styles.css",
+                            "node_modules/ngx-toastr/toastr.css",
+                            "node_modules/angular-calendar/css/angular-calendar.css",
+                            "node_modules/chartist/dist/chartist.css",
+                            "node_modules/quill/dist/quill.snow.css",
+                            "node_modules/dragula/dist/dragula.css",
+                            "src/assets/scss/style.scss"
+                        ],
+                        "assets": [
+                            "src/assets",
+                            "src/favicon.ico"
+                        ]
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "src/tsconfig.json",
+                            "src/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                }
+            }
+        },
+        "ResponsibleSystem-e2e": {
+            "root": "",
+            "sourceRoot": "",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "./protractor.conf.js",
+                        "devServerTarget": "ResponsibleSystem:serve"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "e2e/tsconfig.e2e.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "defaultProject": "ResponsibleSystem",
+    "schematics": {
+        "@schematics/angular:component": {
+            "prefix": "app",
+            "styleext": "scss"
+        },
+        "@schematics/angular:directive": {
+            "prefix": "app"
+        }
+    }
+}

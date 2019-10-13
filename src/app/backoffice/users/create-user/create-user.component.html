@@ -1,0 +1,226 @@
+﻿<div bsModal
+    #createUserModal="bs-modal"
+    class="modal fade"
+    (onShown)="onShown()"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="createUserModal"
+    aria-hidden="true"
+    [config]="{backdrop: 'static'}">
+    <form *ngIf="active"
+        #createUserForm="ngForm"
+        id="frm_create_user"
+        novalidate
+        (ngSubmit)="save()">
+        <v-modal modalContent>
+            <div v-modal-header>
+                <h2>
+                    <span>{{l("Create new user")}}</span>
+                </h2>
+                <button type="button"
+                    class="close"
+                    (click)="close()"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div v-modal-body>
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label for="userRole"
+                                    class="form-label">{{l("User role")}}</label>
+                                <p-dropdown [options]="roles"
+                                    [(ngModel)]="user.userRole"
+                                    name="roles"
+                                    [autoWidth]="true"
+                                    [style]="{'width': '100%', 'font-size': '13px', 'padding':'2px 5px'}">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12"
+                        [hidden]="!isFarmRequired">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label for="farm"
+                                    class="form-label">{{l("Farm")}}</label>
+                                <input [hidden]="farms != null"
+                                    type="text"
+                                    disabled
+                                    class="form-control"
+                                    placeholder="Loading farms">
+                                <input [hidden]="farms == null || farms.length > 0"
+                                    type="text"
+                                    disabled
+                                    class="form-control"
+                                    placeholder="No farms defined">
+                                <p-dropdown [hidden]="farms == null || farms.length == 0"
+                                    [options]="farms"
+                                    [(ngModel)]="user.farmId"
+                                    #farm="ngModel"
+                                    placeholder="Select farm"
+                                    name="farms"
+                                    [autoWidth]="true"
+                                    [style]="{'width': '100%', 'font-size': '13px', 'padding':'2px 5px'}"
+                                    [class.danger]="farm.touched && isFarmRequired && user.farmId == null">
+                                </p-dropdown>
+                            </div>
+                            <div *ngIf="farm.touched && isFarmRequired && user.farmId == null"
+                                class="form-control-feedback">
+                                Please select farm
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label for="name"
+                                    class="form-label">{{l("Name")}}</label>
+                                <input id="name"
+                                    #firstName="ngModel"
+                                    type="text"
+                                    name="Name"
+                                    [(ngModel)]="user.name"
+                                    required
+                                    minlength="2"
+                                    maxlength="32"
+                                    class="validate form-control"
+                                    placeholder="{{l('Name')}}"
+                                    [class.form-control-danger]="firstName.invalid && firstName.touched">
+                            </div>
+                            <div *ngIf="firstName.invalid && firstName.touched"
+                                class="form-control-feedback">
+                                First name is required, and must have at least 3 characters
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label for="surname"
+                                    class="form-label">{{l("Surname")}}</label>
+                                <input id="surname"
+                                    #lastName="ngModel"
+                                    type="text"
+                                    name="Surname"
+                                    [(ngModel)]="user.surname"
+                                    required
+                                    minlength="2"
+                                    maxlength="32"
+                                    class="validate form-control"
+                                    placeholder="{{l('Surname')}}"
+                                    [class.form-control-danger]="lastName.invalid && lastName.touched">
+                            </div>
+                            <div *ngIf="lastName.invalid && lastName.touched"
+                                class="form-control-feedback">
+                                Last name is required, and must have at least 3 characters
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label for="email"
+                                    class="form-label">{{l("Email address")}}</label>
+                                <input id="email"
+                                    #emailAddress="ngModel"
+                                    type="email"
+                                    name="EmailAddress"
+                                    [(ngModel)]="user.emailAddress"
+                                    maxlength="256"
+                                    minlength="2"
+                                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+                                    class="validate form-control"
+                                    required
+                                    placeholder="{{l('Email address')}}"
+                                    [class.form-control-danger]="emailAddress.invalid && emailAddress.touched">
+                            </div>
+                            <div *ngIf="emailAddress.invalid && emailAddress.touched"
+                                class="form-control-feedback">
+                                Email is required, and must have at least 3 characters
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label for="password"
+                                    class="form-label">{{l("Password")}}</label>
+                                <input id="password"
+                                    #password="ngModel"
+                                    type="password"
+                                    name="Password"
+                                    [(ngModel)]="user.password"
+                                    required
+                                    maxlength="32"
+                                    class="validate form-control"
+                                    placeholder="{{l('Password')}}"
+                                    [class.form-control-danger]="password.invalid && password.touched">
+                            </div>
+                            <div *ngIf="password.invalid && password.touched"
+                                class="form-control-feedback">
+                                Password is required, and must have at least 3 characters
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label for="confirmpassword"
+                                    class="form-label">{{l("Confirm password")}}</label>
+                                <input id="confirmpassword"
+                                    #passwordConfirm="ngModel"
+                                    type="password"
+                                    name="ConfirmPassword"
+                                    class="validate form-control"
+                                    [(ngModel)]="user.confirmPassword"
+                                    equalTo="#password"
+                                    data-msg-equalto="Please enter the same password again."
+                                    required
+                                    maxlength="32"
+                                    placeholder="{{l('Confirm password')}}"
+                                    [class.form-control-danger]="passwordConfirm.invalid && passwordConfirm.touched">
+                            </div>
+                            <div *ngIf="passwordConfirm.invalid && passwordConfirm.touched"
+                                class="form-control-feedback">
+                                Password is required, and must have at least 3 characters
+                            </div>
+                            <div *ngIf="passwordConfirm.touched && (passwordConfirm.value !== password.value)"
+                                class="form-control-feedback">
+                                Passwords does not match!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- isActive -->
+                <v-checkbox-list>
+                    <v-checkbox label="{{l('Is active')}}"
+                        id="IsActive"
+                        name="IsActive"
+                        [(ngModel)]="user.isActive"></v-checkbox>
+                </v-checkbox-list>
+                <!-- END: isActive -->
+            </div>
+            <div v-modal-footer>
+                <div class="text-right">
+                    <button [disabled]="saving"
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="close()">{{l("Cancel")}}</button>
+                    <button
+                        [disabled]="!createUserForm.form.valid || saving || passwordConfirm.value !== password.value || (isFarmRequired && user.farmId == null)"
+                        class="btn btn-primary"
+                        type="submit">{{l("Save")}}</button>
+                </div>
+            </div>
+        </v-modal>
+    </form>
+</div>

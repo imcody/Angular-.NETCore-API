@@ -1,0 +1,27 @@
+<div class="form-group" [class.has-danger]="(vInput.touched && (customValidation === null && vInput.invalid || customValidation === true)) || (customErrorValidation !== null && !customErrorValidation)">
+  <label *ngIf="label">
+    <h6>{{label}}<span *ngIf="required === 'true'"> *</span></h6>
+  </label>
+  <input 
+    #vInput="ngModel"
+    [placeholder]="placeholder" 
+    [name]="name" 
+    [required]="required"
+    [(ngModel)]="value"
+    [pattern]="pattern"
+    [attr.min]="min"
+    [attr.max]="max"
+    [type]="type"
+    [class.form-control-danger]="vInput.touched && (customValidation === null && vInput.invalid || customValidation === true)"
+    class="form-control m-input">
+  <span *ngIf="additionalInfo" class="m-form__help">
+    {{additionalInfo}}
+  </span>
+  <div *ngIf="required === 'true' && vInput.touched && (customValidation === null && vInput.invalid || customValidation === true)" class="form-control-feedback">
+    {{errorMessage}}
+  </div>
+  <div *ngIf="!customErrorValidation && vInput.touched" class="form-control-feedback">
+    {{customErrorMessage}}
+  </div>
+</div>
+

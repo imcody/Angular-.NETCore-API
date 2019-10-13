@@ -1,0 +1,25 @@
+<div class="v-section" [class.has-danger]="vInput.invalid && vInput.touched">
+  <label *ngIf="label">
+    <h6>{{label}}<span *ngIf="required === 'true'"> *</span></h6>
+  </label>
+  <br />
+  <p-calendar
+    #vInput="ngModel" 
+    [placeholder]="placeholder"
+    [name]="name" 
+    [required]="required"
+    [(ngModel)]="value"
+    [showIcon]="true" 
+    name="caseDeadline" 
+    dateFormat="dd/mm/yy" 
+    class="v-calendar"
+    [minDate]="minDate"
+    [maxDate]="maxDate"
+    [class.ui-state-danger]="vInput.invalid && vInput.touched"
+    [yearNavigator]="yearNavigator"
+    yearRange='1940:{{currentYear}}'>
+  </p-calendar>
+  <div *ngIf="required === 'true' && vInput.invalid && vInput.touched" class="form-control-feedback">
+      {{errorMessage}}
+  </div>
+</div>

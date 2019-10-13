@@ -1,0 +1,36 @@
+<div [class.has-danger]="(mdcInput.invalid && mdcInput.touched) || (customValidation === false && mdcInput.touched) || (!checkForSpaces() && mdcInput.touched)">
+  <div class="{{isLayoutVertical ? 'case-relationship__single--inline' : ''}}">
+    <span class="m--font-bold">{{label}}</span>
+    <ng-content></ng-content>
+    <div class="{{isLayoutVertical ? 'case-relationship__single--inline-input' : ''}}">
+      <p-autoComplete #mdcInput="ngModel"
+        (completeMethod)="onSearch($event)"
+        [(ngModel)]="value"
+        [name]="name"
+        [placeholder]="placeholder"
+        [required]="true"
+        [suggestions]="suggestions"
+        [pattern]="pattern()"
+        (onSelect)="onSelect()"
+        (onKeyUp)="onInvalidInput()"
+        class="dropdown-options"
+        inputStyleClass='form-control m-input v-autocomplete-input'></p-autoComplete>
+    </div>
+  </div>
+  <div *ngIf="required === 'true' && mdcInput.invalid && mdcInput.touched"
+    class="form-control-feedback">
+    {{errorMessage}}
+  </div>
+  <div *ngIf="mdcInput.value?.length < minCharacters && mdcInput.invalid && mdcInput.touched"
+    class="form-control-feedback">
+    Patient ID minimum lenght is {{minCharacters}}.
+  </div>
+  <div *ngIf="!mdcInput.invalid && !checkForSpaces() && mdcInput.touched"
+    class="form-control-feedback">
+    Whitespace characters are not allowed.
+  </div>
+  <div *ngIf="!mdcInput.invalid && customValidation === false && mdcInput.touched"
+    class="form-control-feedback">
+    {{customErrorMessage}}
+  </div>
+</div>

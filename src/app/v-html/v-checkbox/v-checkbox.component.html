@@ -1,0 +1,18 @@
+<p-checkbox *ngIf="selectedItems"
+  [name]="name"
+  label="{{label}}"
+  labelStyleClass = "{{labelStyleClass}}"
+  [value]="value"
+  [binary]="binary"
+  [(ngModel)]="selectedItems">
+</p-checkbox>
+
+<p-checkbox *ngIf="!selectedItems"
+  [name]="name"
+  label="{{label}}"
+  labelStyleClass = "{{labelStyleClass}}"
+  [value]="value"
+  binary="true"
+  [(ngModel)]="value"
+  [disabled]="disabled">
+</p-checkbox>

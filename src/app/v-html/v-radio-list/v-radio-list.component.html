@@ -1,0 +1,8 @@
+<div class="v-checkbox-list">
+  <label *ngIf="label">
+    <h6>{{label}}<span *ngIf="required === 'true'"> *</span></h6>
+  </label>
+  <div>
+    <ng-content></ng-content>
+  </div>
+</div>

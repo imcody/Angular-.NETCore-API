@@ -1,0 +1,18 @@
+<div class="{{colwidth}} v-section" [class.has-danger]="mdcInput.invalid && mdcInput.touched">
+    <label *ngIf="label">
+        <h6>{{label}}<span *ngIf="required === 'true'"> *</span></h6>
+    </label>
+    <textarea 
+        #mdcInput="ngModel"
+        [(ngModel)]="value"
+        [name]="name"
+        [placeholder]="placeholder"
+        [required]="required"
+        [pattern]="pattern"
+        [rows]="rows"
+        [class.form-control-danger]="mdcInput.invalid && mdcInput.touched"  
+        class="form-control m-input"></textarea>
+    <div *ngIf="required === 'true' && mdcInput.invalid && mdcInput.touched" class="form-control-feedback">
+        {{errorMessage}}
+    </div>
+</div>

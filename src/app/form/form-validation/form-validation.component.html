@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Form validation with hero</h4>
+                <h6 class="card-subtitle">This is the simple form validation page <a href="https://angular.io/guide/form-validation" target="_blank">Official site</a></h6>
+                <form #heroForm="ngForm">
+                    <div [hidden]="heroForm.submitted">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input id="name" name="name" class="form-control" required minlength="4" forbiddenName="bob" [(ngModel)]="hero.name" #name="ngModel">
+                            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                                <div *ngIf="name.errors.required"> Name is required. </div>
+                                <div *ngIf="name.errors.minlength"> Name must be at least 4 characters long. </div>
+                                <div *ngIf="name.errors.forbiddenName"> Name cannot be Bob. </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="alterEgo">Alter Ego</label>
+                            <input id="alterEgo" class="form-control" name="alterEgo" [(ngModel)]="hero.alterEgo"> </div>
+                        <div class="form-group">
+                            <label for="power">Hero Power</label>
+                            <select id="power" name="power" class="form-control" required [(ngModel)]="hero.power" #power="ngModel">
+                                <option *ngFor="let p of powers" [value]="p">{{p}}</option>
+                            </select>
+                            <div *ngIf="power.errors && power.touched" class="alert alert-danger">
+                                <div *ngIf="power.errors.required">Power is required.</div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-danger" [disabled]="heroForm.invalid">Submit</button>
+                        <button type="button" class="btn btn-inverse" (click)="heroForm.resetForm({})">Reset</button>
+                    </div>
+                    <div class="submitted-message" *ngIf="heroForm.submitted">
+                        <p>You've submitted your hero, {{ heroForm.value.name }}!</p>
+                        <button class="btn btn-inverse" (click)="heroForm.resetForm({})">Add new hero</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Login form Validation</h4>
+                <h6 class="card-subtitle">This is the simple form validation page</h6>
+                <form #LoginForm="ngForm">
+                    <div [hidden]="LoginForm.submitted">
+                        <div class="form-group">
+                            <label for="name">Username</label>
+                            <input id="username" name="username" class="form-control" required minlength="2" forbiddenName="bob" [(ngModel)]="login.username" #username="ngModel">
+                            <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
+                                <div *ngIf="username.errors.required"> Username is required. </div>
+                                <div *ngIf="username.errors.minlength"> Username must be at least 2 characters long. </div>
+                                <div *ngIf="username.errors.forbiddenName"> Username cannot be Bob. </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Password</label>
+                            <input id="password" name="password" type="password" class="form-control" required minlength="2" [(ngModel)]="login.password" #password="ngModel">
+                            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+                                <div *ngIf="password.errors.required"> Password is required. </div>
+                                <div *ngIf="password.errors.minlength"> Password must be at least 2 characters long. </div>
+                                
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-info" [disabled]="LoginForm.invalid">Login</button>
+                        <button type="button" class="btn btn-inverse" (click)="LoginForm.resetForm({})">Reset</button>
+                    </div>
+                    <div class="submitted-message" *ngIf="LoginForm.submitted">
+                        <p>You've submitted your Username, {{ LoginForm.value.username }}!</p>
+                        <p>You've submitted your Password, {{ LoginForm.value.password }}!</p>
+                        <button class="btn btn-inverse" (click)="LoginForm.resetForm({})">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

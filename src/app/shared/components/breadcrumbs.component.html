@@ -1,0 +1,14 @@
+
+<!-- we are going to use one of the following:
+  https://www.npmjs.com/package/angular2-crumbs 
+  https://github.com/gmostert/ng2-breadcrumb -->
+<ul class="breadcrumbs">
+  <li *ngIf="currentRouteLabel !== firstRouteLabel" class="text-uppercase">
+    <a [routerLink]="[firstRouteUrl]">{{firstRouteLabel}}</a>
+  </li>
+  <li *ngIf="secondRouteUrl && currentRouteLabel !== secondRouteLabel"
+    class="text-uppercase">
+    <a [routerLink]="[secondRouteUrl]">{{secondRouteLabel}}</a>
+  </li>
+  <li class="text-uppercase">{{currentRouteLabel}}</li>
+</ul>

@@ -1,0 +1,10 @@
+<div class="row">
+  <label [class.font-normal]="normalFont === 'true'" *ngIf="label" class="col-8">
+    {{label}}
+  </label>
+  <div class="col-4">
+    <label class="align-text-bottom switch-label" [class.font-normal]="normalFont === 'true'" *ngIf="offLabel">{{offLabel}}</label>
+    <ui-switch [(ngModel)]="value" size="small"></ui-switch>
+    <label class="align-text-bottom switch-label" [class.font-normal]="normalFont === 'true'" *ngIf="onLabel">{{onLabel}}</label>
+  </div>
+</div>

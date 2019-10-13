@@ -1,0 +1,29 @@
+<!-- ============================================================== -->
+<!-- toggle and nav items -->
+<!-- ============================================================== -->
+<ul class="navbar-nav mr-auto float-left">
+    <li (click)="toggleSidebar.emit()"
+        class="nav-item m-l-10">
+        <a class="nav-link sidebartoggler text-muted waves-effect waves-dark"
+            href="javascript:void(0)">
+            <i class="ti-menu"></i>
+        </a>
+    </li>
+</ul>
+
+<ul *ngIf="!!appSession.user"
+    class="navbar-nav my-lg-0 float-right">
+    <li class="nav-item">
+        <span class="cursor-default nav-link text-muted waves-effect waves-dark">{{ appSession.user.name }} {{ appSession.user.surname }} ({{ appSession.user.emailAddress }})</span>
+    </li>
+    <li class="nav-item">
+        <span class="cursor-default nav-link text-muted">|</span>
+    </li>
+    <li class="nav-item"
+        placement="bottom-right">
+        <a (click)="logout()"
+            class="nav-link text-muted waves-effect waves-dark"
+            href="#">
+            <i class="fa fa-power-off"></i> Logout</a>
+    </li>
+</ul>

@@ -1,0 +1,14 @@
+.card {
+    .card-header {
+        background-color: transparent;
+        .card-subtitle {
+            margin: 0px;
+        }
+        .card-title {
+            margin-bottom: 5px;
+        }
+    }
+    .card-footer {
+        background-color: transparent;
+    }
+}

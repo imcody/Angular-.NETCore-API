@@ -1,0 +1,16 @@
+<div class="card">
+    <div class="card-header">
+        <h3 *ngIf="title"
+            class="card-title">
+            {{title}}</h3>
+        <h6 *ngIf="subtitle"
+            class="card-subtitle">{{subtitle}}</h6>
+    </div>
+    <div class="card-body">
+        <ng-content select="[v-card-body]"></ng-content>
+    </div>
+    <div #vCardFooter
+    [class.card-footer]="vCardFooter && vCardFooter.children.length != 0">
+        <ng-content select="[v-card-footer]"></ng-content>
+    </div>
+</div>

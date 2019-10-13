@@ -1,0 +1,178 @@
+﻿<div bsModal
+    #addEditLeatherModal="bs-modal"
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="addEditLeatherModal"
+    aria-hidden="true"
+    [config]="{backdrop: 'static'}">
+    <form *ngIf="active"
+        #addEditLeatherForm="ngForm"
+        id="frm_create_user"
+        novalidate
+        (ngSubmit)="save()">
+        <v-modal modalContent>
+            <div v-modal-header>
+                <h2>
+                    <span *ngIf="!isEditForm">{{l("Create new animal")}}</span>
+                    <span *ngIf="isEditForm">{{l("Edit animal")}}</span>
+                </h2>
+                <button type="button"
+                    class="close"
+                    (click)="close()"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div v-modal-body>
+                <div class="row clearfix">
+                    <div *ngIf="canSelectFarm"
+                        class="col-sm-12">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label for="farm"
+                                    class="form-label">{{l("Farm")}}</label>
+                                <input [hidden]="farms != null"
+                                    type="text"
+                                    disabled
+                                    class="form-control"
+                                    placeholder="Loading farms">
+                                <input [hidden]="farms == null || farms.length > 0"
+                                    type="text"
+                                    disabled
+                                    class="form-control"
+                                    placeholder="No farms defined">
+                                <p-dropdown [hidden]="farms == null || farms.length == 0"
+                                    [options]="farms"
+                                    [(ngModel)]="leather.farmId"
+                                    #farm="ngModel"
+                                    placeholder="Select farm"
+                                    name="farms"
+                                    [autoWidth]="true"
+                                    [style]="{'width': '100%', 'font-size': '13px', 'padding':'2px 5px'}"
+                                    [class.danger]="farm.touched && isFarmRequired && user.farmId == null">
+                                </p-dropdown>
+                            </div>
+                            <div *ngIf="farm.touched && isFarmRequired && leather.farmId == null"
+                                class="form-control-feedback">
+                                Please select farm
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label for="name"
+                                    class="form-label">{{l("PP Number")}}</label>
+                                <input id="ppNumber"
+                                    #ppNumber="ngModel"
+                                    type="text"
+                                    name="ppNumber"
+                                    [(ngModel)]="leather.ppNo"
+                                    required
+                                    minlength="1"
+                                    maxlength="32"
+                                    class="validate form-control"
+                                    placeholder="{{l('PP Number')}}"
+                                    [class.form-control-danger]="ppNumber.invalid && ppNumber.touched">
+                            </div>
+                            <div *ngIf="ppNumber.invalid && ppNumber.touched"
+                                class="form-control-feedback">
+                                PP number is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label for="name"
+                                    class="form-label">{{l("ID Number")}}</label>
+                                <input id="idNumber"
+                                    #idNumber="ngModel"
+                                    type="text"
+                                    name="idNumber"
+                                    [(ngModel)]="leather.idNo"
+                                    required
+                                    minlength="1"
+                                    maxlength="32"
+                                    class="validate form-control"
+                                    placeholder="{{l('ID Number')}}"
+                                    [class.form-control-danger]="idNumber.invalid && idNumber.touched">
+                            </div>
+                            <div *ngIf="idNumber.invalid && idNumber.touched"
+                                class="form-control-feedback">
+                                Id number is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label for="name"
+                                    class="form-label">{{l("Gender")}}</label>
+                                <p-dropdown [options]="genders"
+                                    [(ngModel)]="leather.gender"
+                                    #gender="ngModel"
+                                    placeholder="Select gender"
+                                    name="gender"
+                                    required
+                                    [autoWidth]="true"
+                                    [style]="{'width': '100%', 'font-size': '13px', 'padding':'2px 5px'}"
+                                    [class.danger]="gender.touched && leather.gender == null">
+                                </p-dropdown>
+                            </div>
+                            <div *ngIf="gender.invalid && gender.touched"
+                                class="form-control-feedback">
+                                Gender is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label for="age"
+                                    class="form-label">{{l("Age")}}</label>
+                                <input id="age"
+                                    #age="ngModel"
+                                    type="number"
+                                    name="age"
+                                    [(ngModel)]="leather.age"
+                                    required
+                                    min="1"
+                                    class="validate form-control"
+                                    placeholder="{{l('Age')}}"
+                                    [class.form-control-danger]="(age.invalid || leather.age <= 0) && age.touched">
+                            </div>
+                            <div *ngIf="(age.invalid || leather.age <= 0) && age.touched"
+                                class="form-control-feedback">
+                                Age is required, and must be greater than zero
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group form-float">
+                            <v-datapicker label="Estimated slaughter date"
+                                name="slaughterTime"
+                                required="true"
+                                [minDate]="minDate"
+                                [(ngModel)]="date"
+                                errorMessage="Estimated slaughter date is required"
+                                placeholder="Estimated slaughter date (required)"></v-datapicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-modal-footer>
+                <div class="text-right">
+                    <button [disabled]="saving"
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="close()">{{l("Cancel")}}</button>
+                    <button [disabled]="!addEditLeatherForm.valid || saving || !leather.gender || leather.age <= 0 || (canSelectFarm && !leather.farmId)"
+                        class="btn btn-primary"
+                        type="submit">{{l("Save")}}</button>
+                </div>
+            </div>
+        </v-modal>
+    </form>
+</div>

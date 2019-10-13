@@ -1,0 +1,96 @@
+﻿<div class="row"
+    [@routerTransition]>
+    <div class="col-12">
+        <v-card title="{{l('Tannery leathers')}}">
+            <div v-card-body>
+                <div>
+                    <form class="pull-left w-25 m-b-30">
+                        <input type='text'
+                            class="form-control"
+                            placeholder='Type to filter the name column...'
+                            (input)="dt.filterGlobal($event.target.value, 'contains')" />
+                    </form>
+                    <div class="pull-right">
+                        <a class="refresh-tool"
+                            (click)="refresh()">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+                        <button type="button"
+                            data-toggle="modal"
+                            class="btn btn-primary pull-right"
+                            (click)="registerLeather()">
+                            <i class="fa fa-plus"></i> Register leather
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div *ngIf="isTableLoading">
+                    <div class="lds-ellipsis">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <p-table #dt
+                    [hidden]="isTableLoading"
+                    [autoLayout]="true"
+                    [globalFilterFields]="['id', 'name', 'organizationNumber']"
+                    [value]="leathers"
+                    tableStyleClass="ui-table">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>{{l('RSID')}}</th>
+                            <th>{{l('PP Number')}}</th>
+                            <th>{{l('ID Number')}}</th>
+                            <th>{{l('Farm')}}</th>
+                            <th>{{l('Type')}}</th>
+                            <th>{{l('Thickness')}}</th>
+                            <th>{{l('Area')}}</th>
+                            <th>{{l('Price per ft')}}</th>
+                            <th>{{l('In storage')}}</th>
+                            <th>{{l('Actions')}}</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body"
+                        let-leather>
+                        <tr>
+                            <td>{{leather.id}}</td>
+                            <td>{{leather.ppNo}}</td>
+                            <td>{{leather.idNo}}</td>
+                            <td>{{leather.farm}}</td>
+                            <td>{{getType(leather)}}</td>
+                            <td>{{leather.thickness}}</td>
+                            <td>{{leather.totalArea}}</td>
+                            <td>{{leather.pricePerFt}}</td>
+                            <td>{{leather.inStorage ? 'Yes' : 'No'}}</td>
+                            <td>
+                                <ul *ngIf="!leather.inStorage"
+                                    class="grid-list">
+                                    <li>
+                                        <a (click)="editLeather(leather)">
+                                            <i class="font--blue fa fa-edit"></i></a>
+                                    </li>
+                                    <li>
+                                        <a (click)="moveToStorage(leather)">
+                                            <i class="font--blue fa fa-archive"></i></a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p class="text-center"
+                    *ngIf="!isTableLoading && leathers.length == 0">No records</p>
+                <div class="text-align: center;"
+                    *ngIf="totalItems > pageSize">
+                    <pagination-controls (pageChange)="getDataPage($event)"
+                        id="server"></pagination-controls>
+                </div>
+            </div>
+        </v-card>
+    </div>
+</div>
+
+<app-add-edit-tannery-leather-modal #addEditTanneryLeatherModal
+    (modalSave)="refresh()"></app-add-edit-tannery-leather-modal>

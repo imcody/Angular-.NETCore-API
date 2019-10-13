@@ -1,0 +1,84 @@
+﻿<div bsModal
+    #addEditInventoryModal="bs-modal"
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="addEditInventoryModal"
+    aria-hidden="true"
+    [config]="{backdrop: 'static'}">
+    <form *ngIf="active"
+        #addEditInventoryForm="ngForm"
+        id="frm_create_user"
+        novalidate
+        (ngSubmit)="save()">
+        <v-modal modalContent>
+            <div v-modal-header>
+                <h2>
+                    <span *ngIf="!isEditForm">{{l("Register leather")}}</span>
+                    <span *ngIf="isEditForm">{{l("Edit inventory item")}}</span>
+                </h2>
+                <button type="button"
+                    class="close"
+                    (click)="close()"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div v-modal-body>
+                <div class="row clearfix">
+                    <div class="col-sm-12">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label for="name"
+                                    class="form-label">{{l("RSID")}}</label>
+                                <input [hidden]="isEditForm"
+                                    id="leatherId"
+                                    #leatherId="ngModel"
+                                    type="number"
+                                    name="leatherId"
+                                    [(ngModel)]="inventory.leatherId"
+                                    required
+                                    min="1"
+                                    class="validate form-control"
+                                    placeholder="{{l('RSID')}}"
+                                    [class.form-control-danger]="leatherId.invalid && leatherId.touched">
+                                <input [hidden]="!isEditForm"
+                                    id="leatherIdPlaceholder"
+                                    type="number"
+                                    disabled
+                                    name="leatherIdPlaceholder"
+                                    [(ngModel)]="inventory.leatherId"
+                                    class="validate form-control">
+                            </div>
+                            <div *ngIf="!isEditForm && leatherId.invalid && leatherId.touched"
+                                class="form-control-feedback">
+                                RSID is required, and must be greater than 0
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group form-float">
+                            <v-datapicker label="Arrival date"
+                                name="arrivalTime"
+                                required="true"
+                                [(ngModel)]="date"
+                                errorMessage="Arrival date is required"
+                                placeholder="Arrival date (required)"></v-datapicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-modal-footer>
+                <div class="text-right">
+                    <button [disabled]="saving"
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="close()">{{l("Cancel")}}</button>
+                    <button [disabled]="!addEditInventoryForm.valid || saving"
+                        class="btn btn-primary"
+                        type="submit">{{l("Save")}}</button>
+                </div>
+            </div>
+        </v-modal>
+    </form>
+</div>

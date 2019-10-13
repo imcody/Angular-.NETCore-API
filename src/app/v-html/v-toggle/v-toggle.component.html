@@ -1,0 +1,11 @@
+<div class="row">
+    <label [class.font-normal]="normalFont === 'true'" *ngIf="label" class="col-10">
+      {{label}}
+    </label>
+    <div class="v-toggle col-2">
+        <p-toggleButton 
+        [(ngModel)]="value" 
+        [offLabel]="offLabel" 
+        [onLabel]="onLabel"></p-toggleButton>
+    </div>
+  </div>

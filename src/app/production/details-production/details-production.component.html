@@ -1,0 +1,49 @@
+<div bsModal
+    #detailsProductionModal="bs-modal"
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-hidden="true"
+    [config]="{backdrop: 'static'}">
+    <form *ngIf="active"
+        id="frm_details"
+        novalidate>
+        <v-modal modalContent>
+            <div v-modal-header>
+                <h2>
+                    <span>{{l("Production")}}</span>
+                </h2>
+                <button type="button"
+                    class="close"
+                    (click)="close()"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div v-modal-body>
+                <div class="clearfix">
+                    <app-detail-property label="Upper leather"
+                        [value]="production.upperLeather"></app-detail-property>
+                    <app-detail-property label="Lining leather"
+                        [value]="production.liningLeather"></app-detail-property>
+                    <app-detail-property label="BackCounter leather"
+                        [value]="production.backCounterLeather"></app-detail-property>
+                    <app-detail-property label="Welt leather"
+                        [value]="production.weltLeather"></app-detail-property>
+                    <app-detail-property label="Sole leather"
+                        [value]="production.soleLeather"></app-detail-property>
+                    <app-detail-property label="Heel leather"
+                        [value]="production.heelLeather"></app-detail-property>
+                    <app-detail-property label="In-sock leather"
+                        [value]="production.inSockLeather"></app-detail-property>
+                    <app-detail-property label="Filling leather"
+                        [value]="production.fillingLeather"></app-detail-property>
+                    <app-detail-property label="Reinforcement leather"
+                        [value]="production.reinforcementLeather"></app-detail-property>
+                    <app-detail-property label="Removable in-sock leather"
+                        [value]="production.removableInSockLeather"></app-detail-property>
+                </div>
+            </div>
+        </v-modal>
+    </form>
+</div>

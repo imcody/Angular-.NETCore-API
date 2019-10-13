@@ -1,0 +1,54 @@
+<div class="v-section">
+  <label *ngIf="label">
+    <h4>{{label}}</h4>
+  </label>
+  <!-- no value -->
+  <div *ngIf="label && !value && (customContent && customContent.children.length == 0)">
+     n/a
+  </div>
+  <!-- END: no value -->
+  <div *ngIf="value">
+     <!-- text -->
+    <div *ngIf="type === 'text'">
+      <span>{{value}}</span>
+    </div>
+     <!-- END: text -->
+    <!-- coma-sep-list -->
+    <div *ngIf="type === 'coma-sep-list'">
+      <span *ngFor="let v of value.split(',')">
+        {{v}}
+        <br />
+      </span>
+    </div>
+    <!-- END: coma-sep-list -->
+    <!-- asset -->
+    <div *ngIf="type === 'asset'"
+      class="m-widget4">
+      <div class="m-widget4__item">
+        <div class="m-widget4__img m-widget4__img--icon">
+          <img src="/assets/app/media/img/files/{{assetType}}.svg"
+            alt="">
+        </div>
+        <div class="m-widget4__info">
+          <a [attr.href]='value'>
+            {{value.split("/").reverse()[0]}}
+          </a>
+        </div>
+        <div class="m-widget4_ext">
+          <a [attr.href]='value'>
+            <i class="la la-download"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- END: asset -->
+    <!-- url -->
+    <div *ngIf="type === 'url'">
+      <a [attr.href]="getUrl()" target="blank">{{value}}</a>
+    </div>
+    <!-- END: url -->
+  </div>
+  <div #customContent>
+    <ng-content></ng-content>
+  </div>
+</div>

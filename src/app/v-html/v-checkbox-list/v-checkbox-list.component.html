@@ -1,0 +1,16 @@
+<div class="v-checkbox-list"
+  [class.has-danger]="!isValid">
+  <label *ngIf="label">
+    <h6>
+      {{label}}
+      <span *ngIf="required">*</span>
+    </h6>
+  </label>
+  <div>
+    <ng-content></ng-content>
+  </div>
+  <div *ngIf="required && !isValid"
+    class="form-control-feedback">
+    {{errorMessage}}
+  </div>
+</div>

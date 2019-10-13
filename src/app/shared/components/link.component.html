@@ -1,0 +1,10 @@
+<div *ngIf="isActive" (click)="openLink(url)">
+  <div class="dark-blue primary-grid__tile" [class.inactive]="!enabled">
+    <div class="image">
+      <img *ngIf="imgSrc" [src]="imgSrc" />
+    </div>
+    <div class="caption">
+      <p>{{label}}</p>
+    </div>
+  </div>
+</div>

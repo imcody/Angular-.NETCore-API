@@ -1,0 +1,93 @@
+<v-card title="HTML elements from PrimeNG"
+    subtitle="list of elements">
+    <div v-card-body>
+        <div class="row">
+            <v-section class="col-lg-4">
+                <v-uploadable-logo (newImageUploaded)="onImageUploaded($event)">
+                </v-uploadable-logo>
+            </v-section>
+        </div>
+        <div class="row">
+            <v-section class="col-lg-4"
+                label="v-checkbox">
+                <v-checkbox-list>
+                    <v-checkbox label="ResponsibleSystem checkbox 1"
+                        name="checkbox">
+                    </v-checkbox>
+                    <v-checkbox label="ResponsibleSystem checkbox 2"
+                        name="checkbox">
+                    </v-checkbox>
+                    <v-checkbox label="ResponsibleSystem checkbox 3"
+                        name="checkbox">
+                    </v-checkbox>
+                </v-checkbox-list>
+            </v-section>
+            <v-section class="col-lg-4"
+                label="v-datepicker">
+                <v-datapicker label="Consultation date"
+                    name="caseDeadline"
+                    required="true"
+                    errorMessage="Consent deadline is required"
+                    placeholder="Consent deadline (required)"
+                    [yearNavigator]="true"></v-datapicker>
+            </v-section>
+            <v-section class="col-lg-4"
+                label="Input">
+                <v-input label="Basic input"
+                    name="basicInput"
+                    required="true"
+                    placeholder="Basic input (required)"
+                    pattern=".+"
+                    errorMessage="Basic input is required."></v-input>
+            </v-section>
+        </div>
+        <div class="row">
+            <v-section class="col-lg-4"
+                label="Radio list">
+                <v-radio-list label="Radio list">
+                    <v-radio name="radiolist"
+                        label="Radio 1"
+                        input-value="Radio 1"></v-radio>
+                    <br />
+                    <v-radio name="radiolist"
+                        label="Radio 2"
+                        input-value="Radio 2"></v-radio>
+                    <br />
+                    <v-radio name="radiolist"
+                        label="Radio 3"
+                        input-value="Radio 3"></v-radio>
+                </v-radio-list>
+            </v-section>
+            <v-section class="col-lg-4"
+                label="Select">
+                <v-select label="Select"
+                    [options]="selectOptions"
+                    placeholder="-- Select --"
+                    name="selectOptions"
+                    inline="true">
+                </v-select>
+            </v-section>
+
+            <v-section label="Switch"
+                class="col-lg-4">
+                <v-switch label=""
+                    offLabel="Yes"
+                    onLabel="No"
+                    normalFont="true">
+                </v-switch>
+            </v-section>
+        </div>
+        <div class="row">
+            <v-section label="Textarea"
+                class="col-lg-4">
+                <v-textarea label="Textarea">
+                </v-textarea>
+            </v-section>
+            <v-section label="Toggle"
+                class="col-lg-4">
+                <v-toggle label="Toggle">
+                </v-toggle>
+            </v-section>
+        </div>
+    </div>
+</v-card>

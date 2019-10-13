@@ -1,0 +1,127 @@
+﻿<div bsModal
+    #editProductionModal="bs-modal"
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="editProductionModal"
+    aria-hidden="true"
+    [config]="{backdrop: 'static'}">
+    <form *ngIf="active"
+        #editProductionForm="ngForm"
+        id="frm_create_user"
+        novalidate
+        (ngSubmit)="save()">
+        <v-modal modalContent>
+            <div v-modal-header>
+                <h2>
+                    <span>{{l("Production")}}</span>
+                </h2>
+                <button type="button"
+                    class="close"
+                    (click)="close()"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div v-modal-body>
+                <div class="clearfix">
+                    <div *ngIf="isStep1"
+                        class="row">
+                        <div class="col-sm-12">
+                            <div class="form-float">
+                                <v-datapicker label="Estimated departure date"
+                                    name="slaughterTime"
+                                    required="true"
+                                    [(ngModel)]="date"
+                                    errorMessage="Estimated departure date is required"
+                                    placeholderr="Estimated departure date (required)"></v-datapicker>
+                            </div>
+                        </div>
+                    </div>
+                    <edit-property [options]="inventory"
+                        name="upperLeatherId"
+                        label="Upper leather"
+                        [showClear]="true"
+                        placeholder="Upper leather"
+                        [startValue]="production.upperLeatherId"
+                        [(ngModel)]="production.upperLeatherId"></edit-property>
+                    <edit-property [options]="inventory"
+                        name="liningLeatherId"
+                        label="Lining leather"
+                        [showClear]="true"
+                        placeholder="Lining leather"
+                        [startValue]="production.liningLeatherId"
+                        [(ngModel)]="production.liningLeatherId"></edit-property>
+                    <edit-property [options]="inventory"
+                        name="backCounterLeather "
+                        label="BackCounter leather"
+                        [showClear]="true"
+                        placeholder="BackCounter leather"
+                        [startValue]="production.backCounterLeatherId"
+                        [(ngModel)]="production.backCounterLeatherId"></edit-property>
+                    <edit-property [options]="inventory"
+                        name="weltLeather "
+                        label="Welt leather"
+                        [showClear]="true"
+                        placeholder="Welt leather"
+                        [startValue]="production.weltLeatherId"
+                        [(ngModel)]="production.weltLeatherId"></edit-property>
+                    <edit-property [options]="inventory"
+                        name="soleLeather "
+                        label="Sole leather"
+                        [showClear]="true"
+                        placeholder="Sole leather"
+                        [startValue]="production.soleLeatherId"
+                        [(ngModel)]="production.soleLeatherId"></edit-property>
+                    <edit-property [options]="inventory"
+                        name="heelLeather "
+                        label="Heel leather"
+                        [showClear]="true"
+                        placeholder="Heel leather"
+                        [startValue]="production.heelLeatherId"
+                        [(ngModel)]="production.heelLeatherId"></edit-property>
+                    <edit-property [options]="inventory"
+                        name="inSockLeather "
+                        label="In-sock leather"
+                        [showClear]="true"
+                        placeholder="In-sock leather"
+                        [startValue]="production.inSockLeatherId"
+                        [(ngModel)]="production.inSockLeatherId"></edit-property>
+                    <edit-property [options]="inventory"
+                        name="fillingLeather "
+                        label="Filling leather"
+                        [showClear]="true"
+                        placeholder="Filling leather"
+                        [startValue]="production.fillingLeatherId"
+                        [(ngModel)]="production.fillingLeatherId"></edit-property>
+                    <edit-property [options]="inventory"
+                        name="reinforcementLeather "
+                        label="Reinforcement leather"
+                        [showClear]="true"
+                        placeholder="Reinforcement leather"
+                        [startValue]="production.reinforcementLeatherId"
+                        [(ngModel)]="production.reinforcementLeatherId"></edit-property>
+                    <edit-property [options]="inventory"
+                        name="removableInSockLeather"
+                        label="Removable in-sock leather"
+                        [showClear]="true"
+                        placeholder="Removable in-sock leather"
+                        [startValue]="production.removableInSockLeatherId"
+                        [(ngModel)]="production.removableInSockLeatherId"></edit-property>
+
+                </div>
+            </div>
+            <div v-modal-footer>
+                <div class="text-right">
+                    <button [disabled]="saving"
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="close()">{{l("Cancel")}}</button>
+                    <button [disabled]="!editProductionForm.valid || saving"
+                        class="btn btn-primary"
+                        type="submit">{{l("Save")}}</button>
+                </div>
+            </div>
+        </v-modal>
+    </form>
+</div>

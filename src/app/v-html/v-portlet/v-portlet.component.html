@@ -1,0 +1,52 @@
+<div class="m-portlet m-portlet--mobile">
+  <!-- head -->
+  <div class="m-portlet__head" [hidden]="!title && (!portletHead || portletHead.children.length == 0)">
+    <div class="m-portlet__head-caption"
+      *ngIf="title">
+      <div class="m-portlet__head-title">
+        <span *ngIf="iconClass !== ''"
+          class="m-portlet__head-icon">
+          <i class="{{iconClass}}"></i>
+        </span>
+        <h3 class="m-portlet__head-text">
+          {{title}}
+        </h3>
+      </div>
+    </div>
+    <div #portletHead
+      [class.m-portlet__head-caption]="portletHead && portletHead.children.length != 0">
+      <ng-content select="[portlet-head]"></ng-content>
+    </div>
+    <div class="header-buttons">
+      <div class="m-portlet__head-tools">
+        <ng-content select="[portlet-tools]"></ng-content>
+      </div>
+      <button *ngIf="portletExpand && portletExpand.children.length != 0"
+        class="icon-button filters"
+        type="button"
+        (click)='toggleList(filterContent)'>
+        <i class="fa fa-sliders"></i>
+      </button>
+    </div>
+  </div>
+  <!-- END: head -->
+  <!-- expandable -->
+  <div #portletExpand
+    [class.m-portlet__expand]="portletExpand && portletExpand.children.length != 0"
+    [@slideInOut]="{value: filterContent.filterList, params: {duration: 1.0}}">
+    <ng-content select="[portlet-filters]"></ng-content>
+  </div>
+  <!-- END: expandable -->
+  <!-- body -->
+  <div class="m-portlet__body"
+    [class.pb-0]="noPaddingBottom">
+    <ng-content select="[portlet-body]"></ng-content>
+  </div>
+  <!-- END: body -->
+  <!-- footer -->
+  <div #portletFooter
+    [class.m-portlet__foot]="portletFooter && portletFooter.children.length != 0">
+    <ng-content select="[portlet-footer]"></ng-content>
+  </div>
+  <!-- END: footer -->
+</div>
